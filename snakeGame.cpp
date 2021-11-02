@@ -1,4 +1,5 @@
 #include <iostream>
+#include <curses.h>
 
 using namespace std;
 
@@ -107,10 +108,13 @@ void Draw()
 void Input()
 {
     char key;
-
-    //player enters key based on direction
-    cin >> key;
-    {
+    initscr();
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
+    
+    //reads players key input
+    key = getch();
         switch(key)
         {
             case 'a':
@@ -134,7 +138,7 @@ void Input()
                 break;
 
         }
-    }
+        endwin();
 }
 
 void Logic()
@@ -178,7 +182,11 @@ void Logic()
     }
     //out of bounds ends game
     if (x > width || x < 0 || y > height || y < 0 )
+    {
         gameOver = true;
+        cout << "You died nigga!";
+    }
+        
 
     //hitting tail ends game
     for(int i = 0; i < nTail; i++)
@@ -186,6 +194,7 @@ void Logic()
         if(tailX[i] == x && tailY[i] == y)
         {
             gameOver = true;
+            cout << "You died nigga!";
         }
     }
     
