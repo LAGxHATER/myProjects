@@ -1,5 +1,6 @@
 #include <iostream>
 #include <curses.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -60,7 +61,7 @@ void Draw()
             //printing snake head
             if(i == y && j == x)
             {
-                cout << "O";
+                cout << "8";
             }
             //printing fruit
             else if(i == fruitY && j == fruitX)
