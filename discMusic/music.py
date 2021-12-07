@@ -497,7 +497,7 @@ class Music(commands.Cog):
                 song = Song(source)
 
                 await ctx.voice_state.songs.put(song)
-                await ctx.send('Enqueued {}'.format(str(source)))
+                await ctx.send('Queued {}'.format(str(source)))
 
     @_join.before_invoke
     @_play.before_invoke
