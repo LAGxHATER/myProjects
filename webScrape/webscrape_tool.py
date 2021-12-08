@@ -16,7 +16,7 @@ containers = page_soup.findAll("div", {"class":"item-container"})
 #file to save scraped info
 filename = "products.csv"
 f = open(filename, "w")
-headers = "brand, product_name, shipping\n"
+headers = "brand, product_name, shipping, current_price\n"
 f.write(headers)
 
 
@@ -32,8 +32,13 @@ for container in containers:
     shipping_container = container.findAll("li", {"class":"price-ship"})
     shipping = shipping_container[0].text.strip()
 
+    #retrieves current price
+    current_price_container = container.findAll("li", {"class":"price-current"})
+    current_price = current_price_container[0].text
+
     print("brand: " + brand)
     print("product_name: " + product_name)
     print("shipping: " + shipping)
+    print("current_price: " + current_price)
 
-    f.write(brand + "," + product_name.replace(",", "|") + "," + shipping + "\n")
+    f.write(brand + "," + product_name.replace(",", "|") + "," + shipping + "," + current_price + "\n")
