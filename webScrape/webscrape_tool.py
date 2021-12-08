@@ -41,4 +41,4 @@ for container in containers:
     print("shipping: " + shipping)
     print("current_price: " + current_price)
 
-    f.write(brand + "," + product_name.replace(",", "|") + "," + shipping + "," + current_price + "\n")
+    f.write(brand + ", " + product_name.replace(", ", "| ") + ", " + shipping + ", " + current_price + "\n")
