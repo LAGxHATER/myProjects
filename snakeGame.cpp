@@ -185,7 +185,7 @@ void Logic()
     if (x > width || x < 0 || y > height || y < 0 )
     {
         gameOver = true;
-        cout << "You died nigga!";
+        cout << "You died!";
     }
         
 
@@ -195,7 +195,7 @@ void Logic()
         if(tailX[i] == x && tailY[i] == y)
         {
             gameOver = true;
-            cout << "You died nigga!";
+            cout << "You died!";
         }
     }
     
