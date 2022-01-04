@@ -1,24 +1,40 @@
 #app that takes user location and prints out 3 nearby parking locations
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from bs4 import BeautifulSoup
-from googlesearch import search
+import re
 
-
+switch = True
 #let the user enter their location via zipcode
-user_location = input("Enter your zip code: ")
+while switch:
+    user_location = input("Enter your zip code: ")
+    #validating zip code with regex
+    match = re.search('^\d{5}(-\d{4})?$', user_location)
+
+    if match:
+        switch = False
+    else:
+        print("ERROR: Zip Code Invalid")
+        switch = True
 
 #this will be added onto the search link
 query = "Parking+" + user_location
 
 url = 'https://www.google.com/maps/search/' + query
 
-#opening connection, grabbing the page
-driver = webdriver.Firefox()
+#headless makes browser invisible
+options = Options()
+options.headless = True
+#opening connection, grabbing the page with selenium
+driver = webdriver.Firefox(options=options)
 driver.get(url)
 
 #html parsing using beautifulsoup
 page_html = driver.page_source
 soup = BeautifulSoup(page_html, "html.parser")
+
+#close all browser windows
+driver.quit()
 
 #grabs all parking 
 parking = soup.findAll("div", {"class":"MVVflb-haAclf V0h1Ob-haAclf-d6wfac MVVflb-haAclf-uxVfW-hSRGPd"})
@@ -50,6 +66,5 @@ for container in parking:
     print("\n")
     print("Place: " + name)
     print("Address: " + address)
-
 
     
