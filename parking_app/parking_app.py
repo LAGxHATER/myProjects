@@ -39,13 +39,13 @@ for container in parking:
     address_container = container.findAll("span", {"jstcache":"104"})
     #the address is stored as the second value in the array, meaning if the array len is == 1, no address is available
     if len(address_container) == 1:
-        address = "*****ERROR: Address not listed*****"
+        address = "*****ERROR: Address not available*****"
     elif len(address_container) > 1:
         address = address_container[1].text
 
     #update counter
     counter += 1
-    
+
     #printing 
     print("\n")
     print("Place: " + name)
