@@ -3,11 +3,16 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from bs4 import BeautifulSoup
 import re
+import urllib.parse
 
 switch = True
 #let the user enter their location via zipcode
 while switch:
     user_location = input("Enter your zip code: ")
+    user_location = urllib.parse.quote(user_location)
+
+    print(user_location)
+
     #validating zip code with regex
     match = re.search('^\d{5}(-\d{4})?$', user_location)
 
@@ -52,7 +57,9 @@ for container in parking:
     name = name_container[0].text
 
     #retrieves address
+    parking = container.findAll("span", {"jsinstance":"*1"})
     address_container = container.findAll("span", {"jstcache":"104"})
+
     #the address is stored as the second value in the array, meaning if the array len is == 1, no address is available
     if len(address_container) == 1:
         address = "*****ERROR: Address not available*****"
