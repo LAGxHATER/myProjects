@@ -8,13 +8,13 @@ import urllib.parse
 switch = True
 #let the user enter their location via zipcode
 while switch:
-    user_location = input("Enter your zip code: ")
-    user_location = urllib.parse.quote(user_location)
+    user_input = input("Enter your zip code: ")
 
-    print(user_location)
+    #encode user input
+    user_input = urllib.parse.quote(user_input)
 
     #validating zip code with regex
-    match = re.search('^\d{5}(-\d{4})?$', user_location)
+    match = re.search('^\d{5}(-\d{4})?$', user_input)
 
     if match:
         switch = False
@@ -23,7 +23,7 @@ while switch:
         switch = True
 
 #this will be added onto the search link
-query = "Parking+" + user_location
+query = "Parking+" + user_input
 
 url = 'https://www.google.com/maps/search/' + query
 
