@@ -1,3 +1,4 @@
-To use this webscraper, you must have a file with the name products.csv so that it can print all of the data into that file. 
+To use this webscraper, you must have 2 python libraries: urllib.request and bs4.
 
+A file with the name products.csv is also needed to print and store all data from the webscrape. 
 If you would like to change the name of the file you use, alter the filename variable on line 17 to match. 
